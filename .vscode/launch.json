@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - myfirstprogram",
+            "request": "launch",
+            "mainClass": "myfirstprogram",
+            "projectName": "sandbox"
+        }
+    ]
+}
