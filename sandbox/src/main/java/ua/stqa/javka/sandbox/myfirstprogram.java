@@ -6,12 +6,12 @@ public class MyFirstProgram {
         System.out.println("Hello, " + somebody + "!");
     }
 
-    public static double area(double l) {
-        return l * l;
+    public static double squarearea(Square s) {
+        return s.side * s.side;
     }
 
-    public static double area(double a, double b) {
-        return a * b;
+    public static double rectanglearea(Rectangle r) {
+        return r.sidea * r.sideb;
     }
 
     public static void main(String[] args) {
@@ -20,13 +20,16 @@ public class MyFirstProgram {
         hello("zaloopa");
         hello("Alexei");
 
-        double l = 5;
-        System.out.println("Площадь квадрата со стороной " + l + " = " + area(l));
+        Square square1 = new Square();
+        square1.side = 5;
+                
+        System.out.println("Площадь квадрата со стороной " + square1.side + " = " + squarearea(square1));
 
-        double a = 4;
-        double b = 6;
+        Rectangle rectangle1 = new Rectangle();
+        rectangle1.sidea = 4;
+        rectangle1.sideb = 6;        
 
-        System.out.println("Площадь прямоугла со сторонами " + a + " и " + b " = " + area(a, b));
+        System.out.println("Площадь прямоугла со сторонами " + rectangle1.sidea + " и " + rectangle1.sideb + " = " + rectanglearea(rectangle1));
 
         // System.out.println("Hello, "+ somebody);
         // String somebody = "world!";
