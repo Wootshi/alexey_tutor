@@ -4,6 +4,12 @@
             "type": "java",
             "name": "CodeLens (Launch) - MyFirstProgram",
             "request": "launch",
+            "mainClass": "MyFirstProgram"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - MyFirstProgram",
+            "request": "launch",
             "mainClass": "ua.stqa.javka.sandbox.MyFirstProgram",
             "projectName": "sandbox"
         },
