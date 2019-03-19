@@ -1,4 +1,4 @@
-package org.automation.sandbox;
+package org.automation.java;
 
 public class MyFirstProgram {
 

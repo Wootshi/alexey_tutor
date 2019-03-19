@@ -1,4 +1,4 @@
-package org.automation.sandbox;
+package org.automation.java;
 
 public class Point {
 
@@ -12,7 +12,6 @@ public class Point {
 
     public double distance(Point p1, Point p2) {
         return Math.sqrt((p2.axisx - p1.axisx)*(p2.axisx - p1.axisx) + (p2.axisy - p1.axisy)*(p2.axisy - p1.axisy));
-        //return this.sidea * this.sideb;
-
+        
     }
 }
