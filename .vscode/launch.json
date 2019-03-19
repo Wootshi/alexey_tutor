@@ -4,6 +4,13 @@
             "type": "java",
             "name": "CodeLens (Launch) - MyFirstProgram",
             "request": "launch",
+            "mainClass": "org.automation.sandbox.MyFirstProgram",
+            "projectName": "org.automation.sandbox"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - MyFirstProgram",
+            "request": "launch",
             "mainClass": "MyFirstProgram"
         },
         {
