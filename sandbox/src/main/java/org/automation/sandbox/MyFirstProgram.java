@@ -1,4 +1,4 @@
-package ua.stqa.javka.sandbox;
+package org.automation.sandbox;
 
 public class MyFirstProgram {
 
