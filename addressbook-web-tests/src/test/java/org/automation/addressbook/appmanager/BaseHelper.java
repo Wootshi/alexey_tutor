@@ -2,11 +2,11 @@ package org.automation.addressbook.appmanager;
 
 import org.openqa.selenium.*;
 
-public class HelperBase {
+public class BaseHelper {
     protected WebDriver driver;
     boolean acceptNextAlert = true;
 
-    public HelperBase(WebDriver driver) {
+    public BaseHelper(WebDriver driver) {
         this.driver = driver;
     }
 
@@ -17,6 +17,7 @@ public class HelperBase {
     protected void type(By locator, String text) {
         click(locator);
         if (text != null) {
+
             String existingText = driver.findElement(locator).getAttribute("value");
             if (!text.equals(existingText)) {
                 driver.findElement(locator).clear();
@@ -24,8 +25,8 @@ public class HelperBase {
             }
 
         }
-
     }
+
 
     private boolean isElementPresent(By by) {
         try {
