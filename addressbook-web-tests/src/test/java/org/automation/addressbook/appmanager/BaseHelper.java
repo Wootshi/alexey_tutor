@@ -30,37 +30,28 @@ public class BaseHelper {
         }
     }
 
-    public void selectFromDropdown(By locator, String menuValue) {
+//    public void selectFromDropdown(By locator, String menuValue) {
+//
+//        String existingGroup = driver.findElement(locator).getAttribute("value");
+//
+//        click(locator);
+//
+//        if (existingGroup != null) {
+//            if (existingGroup.equals(menuValue)) {
+//
+//                driver.findElement(locator).sendKeys(menuValue);
+//                driver.findElement(locator).click();
+//
+//            }
+//        } else {
+//
+//            driver.findElement(locator).sendKeys("[none]");
+//            driver.findElement(locator).click();
+//
+//        }
+//
+//    }
 
-        String existingGroup = driver.findElement(locator).getAttribute("value");
-
-        click(locator);
-
-        if (existingGroup != null) {
-            if (existingGroup.equals(menuValue)) {
-
-                driver.findElement(locator).sendKeys(menuValue);
-                driver.findElement(locator).click();
-
-            }
-        } else {
-
-            driver.findElement(locator).sendKeys("[none]");
-            driver.findElement(locator).click();
-
-        }
-
-    }
-
-
-    private boolean isElementPresent(By by) {
-        try {
-            driver.findElement(by);
-            return true;
-        } catch (NoSuchElementException e) {
-            return false;
-        }
-    }
 
     private boolean isAlertPresent() {
         try {
@@ -86,10 +77,12 @@ public class BaseHelper {
         }
     }
 
-    public void enterFirstLastName(ContactData contactData) {
-
-        type(By.name("firstname"), contactData.getFirstname());
-        type(By.name("lastname"), contactData.getSecondname());
-
+    protected boolean isElementPresent(By locator) {
+        try {
+            driver.findElement(locator);
+            return true;
+        } catch (NoSuchElementException ex) {
+            return false;
+        }
     }
 }
