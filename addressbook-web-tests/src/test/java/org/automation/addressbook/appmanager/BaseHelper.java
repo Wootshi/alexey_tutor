@@ -1,11 +1,13 @@
 package org.automation.addressbook.appmanager;
 
+import org.automation.addressbook.model.ContactData;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.Select;
 
 public class BaseHelper {
     protected WebDriver driver;
     boolean acceptNextAlert = true;
+    private String text;
 
     public BaseHelper(WebDriver driver) {
         this.driver = driver;
@@ -17,8 +19,8 @@ public class BaseHelper {
 
     protected void type(By locator, String text) {
         click(locator);
-        if (text != null) {
 
+        if (text != null) {
             String existingText = driver.findElement(locator).getAttribute("value");
             if (!text.equals(existingText)) {
                 driver.findElement(locator).clear();
@@ -28,19 +30,28 @@ public class BaseHelper {
         }
     }
 
-    public void select(By locator, String text) {
+    public void selectFromDropdown(By locator, String menuValue) {
+
+        String existingGroup = driver.findElement(locator).getAttribute("value");
+
         click(locator);
 
-        String existingText = driver.findElement(locator).getAttribute("value");
-        if (existingText != null) {
-            if (!text.equals(existingText)) {
+        if (existingGroup != null) {
+            if (existingGroup.equals(menuValue)) {
+
+                driver.findElement(locator).sendKeys(menuValue);
                 driver.findElement(locator).click();
-            } else {
-                driver.findElement(locator).sendKeys("[none]");
+
             }
+        } else {
+
+            driver.findElement(locator).sendKeys("[none]");
+            driver.findElement(locator).click();
 
         }
+
     }
+
 
     private boolean isElementPresent(By by) {
         try {
@@ -75,4 +86,10 @@ public class BaseHelper {
         }
     }
 
+    public void enterFirstLastName(ContactData contactData) {
+
+        type(By.name("firstname"), contactData.getFirstname());
+        type(By.name("lastname"), contactData.getSecondname());
+
+    }
 }

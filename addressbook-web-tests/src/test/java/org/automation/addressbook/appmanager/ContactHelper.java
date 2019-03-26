@@ -3,6 +3,7 @@ package org.automation.addressbook.appmanager;
 import org.automation.addressbook.model.ContactData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 public class ContactHelper extends BaseHelper {
 
@@ -23,12 +24,10 @@ public class ContactHelper extends BaseHelper {
 
     public void fillContactForm(ContactData contactData) {
 
-
-        type(By.name("firstname"), contactData.getFirstname());
-        type(By.name("lastname"), contactData.getSecondname());
-        select(By.name("new_group"), contactData.getGroup());
-
+        enterFirstLastName(contactData);
+        selectFromDropdown(By.name("new_group"), contactData.getGroup());
     }
+
 
     public void initContactCreation() {
         click(By.linkText("add new"));
@@ -45,10 +44,10 @@ public class ContactHelper extends BaseHelper {
     }
 
     public void initContactModification() {
-        click(By.xpath("xpath=(.//*[normalize-space(text()) and normalize-space(.)='import'])[1]/following::input[1]"));
+        click(By.xpath("/html/body/div/div[4]/form[2]/table/tbody/tr[2]/td[8]/a"));
     }
 
     public void submitContactModification() {
-        click(By.xpath("xpath=(.//*[normalize-space(text()) and normalize-space(.)='import'])[1]/following::img[2]"));
+        click(By.name("update"));
     }
 }

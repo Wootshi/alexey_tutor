@@ -4,7 +4,7 @@ public class ContactData {
 
     private final String firstname;
     private final String secondname;
-    private String group;
+    private final String group;
 
     public ContactData(String firstname, String secondname, String group) {
 
