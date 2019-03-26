@@ -17,49 +17,38 @@ public class ContactHelper extends BaseHelper {
 
     public void submitContactCreation() {
 
-        click(By.xpath("xpath=(.//*[normalize-space(text()) and normalize-space(.)='Notes:'])[1]/following::input[1]"));
+        click(By.name("submit"));
     }
 
+
     public void fillContactForm(ContactData contactData) {
-        String existingGroupValue = driver.findElement(By.name("new_group")).getAttribute("value");
+
 
         type(By.name("firstname"), contactData.getFirstname());
         type(By.name("lastname"), contactData.getSecondname());
+        select(By.name("new_group"), contactData.getGroup());
 
-        if (contactData.getGroup() != existingGroupValue) {
-            click(By.name("new_group"));
-        } else {
-            if (contactData.getGroup() eq)
-            click(By.name(groupValue));
-        }
     }
 
-} else{
-        click(By.name(groupValue));
-        }
-        }
-        }
-
-
-public void initContactCreation(){
+    public void initContactCreation() {
         click(By.linkText("add new"));
-        }
+    }
 
-public void deleteSelectedContact(){
+    public void deleteSelectedContact() {
 
         click(By.name("delete"));
-        }
+    }
 
-public void selectContact(){
+    public void selectContact() {
 
         click(By.name("selected[]"));
-        }
+    }
 
-public void initContactModification(){
+    public void initContactModification() {
         click(By.xpath("xpath=(.//*[normalize-space(text()) and normalize-space(.)='import'])[1]/following::input[1]"));
-        }
+    }
 
-public void submitContactModification(){
+    public void submitContactModification() {
         click(By.xpath("xpath=(.//*[normalize-space(text()) and normalize-space(.)='import'])[1]/following::img[2]"));
-        }
-        }
+    }
+}

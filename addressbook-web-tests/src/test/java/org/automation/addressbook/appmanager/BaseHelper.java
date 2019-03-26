@@ -1,6 +1,7 @@
 package org.automation.addressbook.appmanager;
 
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.Select;
 
 public class BaseHelper {
     protected WebDriver driver;
@@ -27,6 +28,19 @@ public class BaseHelper {
         }
     }
 
+    public void select(By locator, String text) {
+        click(locator);
+
+        String existingText = driver.findElement(locator).getAttribute("value");
+        if (existingText != null) {
+            if (!text.equals(existingText)) {
+                driver.findElement(locator).click();
+            } else {
+                driver.findElement(locator).sendKeys("[none]");
+            }
+
+        }
+    }
 
     private boolean isElementPresent(By by) {
         try {
