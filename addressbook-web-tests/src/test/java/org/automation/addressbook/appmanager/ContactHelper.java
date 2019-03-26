@@ -35,7 +35,8 @@ public class ContactHelper extends BaseHelper {
 
     public void deleteSelectedContact() {
 
-        click(By.name("delete"));
+        click(By.xpath("/html/body/div/div[4]/form[2]/div[2]/input"));
+        driver.switchTo().alert().accept();
     }
 
     public void selectContact() {

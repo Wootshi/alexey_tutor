@@ -2,7 +2,6 @@ package org.automation.addressbook.tests;
 
 
 import org.automation.addressbook.model.ContactData;
-import org.automation.addressbook.model.GroupData;
 import org.testng.annotations.Test;
 
 public class ContactModificationTests extends TestBase {
