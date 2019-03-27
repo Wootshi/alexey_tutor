@@ -14,10 +14,6 @@ public class ContactHelper extends BaseHelper {
 
     }
 
-    public void returnToHomePage() {
-        click(By.linkText("home"));
-    }
-
     public void submitContactCreation() {
 
         click(By.name("submit"));
@@ -25,6 +21,7 @@ public class ContactHelper extends BaseHelper {
 
 
     public void fillContactForm(ContactData contactData, boolean creation) {
+
 
         type(By.name("firstname"), contactData.getFirstname());
         type(By.name("lastname"), contactData.getSecondname());
@@ -60,4 +57,10 @@ public class ContactHelper extends BaseHelper {
         click(By.name("update"));
     }
 
+    public void createContact(ContactData contact) {
+        initContactCreation();
+        fillContactForm(contact, true);
+        submitContactCreation();
+
+    }
 }

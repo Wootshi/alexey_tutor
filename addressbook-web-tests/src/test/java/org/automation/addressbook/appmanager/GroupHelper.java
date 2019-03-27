@@ -12,7 +12,7 @@ public class GroupHelper extends BaseHelper {
 
     }
 
-    public void returnToGroupPage() {
+    public void goToGroupPage() {
         click(By.linkText("groups"));
     }
 
@@ -58,12 +58,9 @@ public class GroupHelper extends BaseHelper {
 
     public void createGroup(GroupData group) {
         initGroupCreation();
-        fillGroupForm(new GroupData("test1", "test", "test"));
+        fillGroupForm(group);
         submitFormCreation();
-        returnToGroupPage();
+
     }
 
-    public boolean isThereAGroup() {
-        return isElementPresent(By.name("selected[]"));
-    }
 }

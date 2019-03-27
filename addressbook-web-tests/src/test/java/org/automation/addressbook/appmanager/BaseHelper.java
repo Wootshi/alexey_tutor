@@ -85,4 +85,9 @@ public class BaseHelper {
             return false;
         }
     }
+
+    public boolean isThereAnEntry() {
+
+        return isElementPresent(By.name("selected[]"));
+    }
 }

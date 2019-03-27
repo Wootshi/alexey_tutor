@@ -26,7 +26,7 @@ public class NavigationHelper extends BaseHelper {
             return;
         }
 
-        click(By.linkText("home"));
+        click(By.cssSelector("#nav > ul:nth-child(1) > li:nth-child(1) > a:nth-child(1)"));
     }
 
 //    public void enterFirstLastName(ContactData contactData) {
