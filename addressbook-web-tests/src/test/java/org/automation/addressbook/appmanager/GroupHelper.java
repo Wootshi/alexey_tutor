@@ -55,4 +55,15 @@ public class GroupHelper extends BaseHelper {
         type(By.name("lastname"), contactData.getSecondname());
 
     }
+
+    public void createGroup(GroupData group) {
+        initGroupCreation();
+        fillGroupForm(new GroupData("test1", "test", "test"));
+        submitFormCreation();
+        returnToGroupPage();
+    }
+
+    public boolean isThereAGroup() {
+        return isElementPresent(By.name("selected[]"));
+    }
 }

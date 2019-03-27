@@ -12,19 +12,27 @@ public class NavigationHelper extends BaseHelper {
     }
 
     public void gotoGroupPage() {
-
+        if (isElementPresent(By.tagName("h1"))
+                && driver.findElement(By.tagName("h1")).getText().equals("Groups")
+                && isElementPresent(By.name("new"))) {
+            return;
+        }
         click(By.linkText("groups"));
     }
 
     public void gotoHomePage() {
 
+        if (isElementPresent(By.name("maintable"))) {
+            return;
+        }
+
         click(By.linkText("home"));
     }
 
-    public void enterFirstLastName(ContactData contactData) {
-
-        type(By.name("firstname"), contactData.getFirstname());
-        type(By.name("lastname"), contactData.getSecondname());
-
-    }
+//    public void enterFirstLastName(ContactData contactData) {
+//
+//        type(By.name("firstname"), contactData.getFirstname());
+//        type(By.name("lastname"), contactData.getSecondname());
+//
+//    }
 }
