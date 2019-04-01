@@ -1,11 +1,16 @@
 package org.automation.addressbook.appmanager;
 
 import org.automation.addressbook.model.ContactData;
+import org.automation.addressbook.model.GroupData;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ContactHelper extends BaseHelper {
 
@@ -63,4 +68,21 @@ public class ContactHelper extends BaseHelper {
         submitContactCreation();
 
     }
+
+    public List<ContactData> getContactList() {
+        List<ContactData> contacts = new ArrayList<>();
+        List<WebElement> elements = driver.findElements(By.cssSelector("tr.entry"));
+        for (WebElement element : elements) {
+            String name = element.findElement(By.cssSelector("td:nth-child(3)")).getText();
+            String lastname = element.findElement(By.cssSelector("td:nth-child(2)")).getText();
+
+            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+
+            ContactData contact = new ContactData(id, name, lastname, null);
+            contacts.add(contact);
+        }
+        return contacts;
+
+    }
+
 }
