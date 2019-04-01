@@ -18,6 +18,7 @@ public class BaseHelper {
     }
 
     protected void type(By locator, String text) {
+
         click(locator);
 
         if (text != null) {
@@ -29,28 +30,6 @@ public class BaseHelper {
 
         }
     }
-
-//    public void selectFromDropdown(By locator, String menuValue) {
-//
-//        String existingGroup = driver.findElement(locator).getAttribute("value");
-//
-//        click(locator);
-//
-//        if (existingGroup != null) {
-//            if (existingGroup.equals(menuValue)) {
-//
-//                driver.findElement(locator).sendKeys(menuValue);
-//                driver.findElement(locator).click();
-//
-//            }
-//        } else {
-//
-//            driver.findElement(locator).sendKeys("[none]");
-//            driver.findElement(locator).click();
-//
-//        }
-//
-//    }
 
 
     private boolean isAlertPresent() {
