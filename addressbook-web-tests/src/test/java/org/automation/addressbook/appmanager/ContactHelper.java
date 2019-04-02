@@ -31,13 +31,21 @@ public class ContactHelper extends BaseHelper {
         type(By.name("firstname"), contactData.getFirstname());
         type(By.name("lastname"), contactData.getSecondname());
 
+
         if (creation) {
-            new Select(driver.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+            String groupexists = driver.findElement(By.name("new_group")).getText();
+
+            if (groupexists.equals(contactData.getGroup())) {
+                new Select(driver.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+            } else if (!groupexists.equals(contactData.getGroup())) {
+                new Select(driver.findElement(By.name("new_group"))).selectByVisibleText("[none]");
+            }
+
         } else {
             Assert.assertFalse(isElementPresent(By.name("new_group")));
         }
-    }
 
+    }
 
     public void initContactCreation() {
         click(By.linkText("add new"));
@@ -49,13 +57,15 @@ public class ContactHelper extends BaseHelper {
         driver.switchTo().alert().accept();
     }
 
-    public void selectContact() {
+    public void selectContact(int index) {
 
-        click(By.name("selected[]"));
+        driver.findElements(By.name("selected[]")).get(index).click();
     }
 
-    public void initContactModification() {
-        click(By.xpath("/html/body/div/div[4]/form[2]/table/tbody/tr[2]/td[8]/a"));
+
+    public void initContactModification(int row) {
+        click(By.xpath("//table/tbody/tr[" + row + "]/td[8]/a"));
+        //click(By.xpath("//table/tbody/tr[2]/td[8]/a/img"));
     }
 
     public void submitContactModification() {
@@ -71,10 +81,13 @@ public class ContactHelper extends BaseHelper {
 
     public List<ContactData> getContactList() {
         List<ContactData> contacts = new ArrayList<>();
-        List<WebElement> elements = driver.findElements(By.cssSelector("tr.entry"));
+        List<WebElement> elements = driver.findElements(By.name("entry"));
         for (WebElement element : elements) {
-            String name = element.findElement(By.cssSelector("td:nth-child(3)")).getText();
-            String lastname = element.findElement(By.cssSelector("td:nth-child(2)")).getText();
+
+            //*[@id="maintable"]/tbody/tr[2]/td[2]
+            //*[@id="maintable"]/tbody/tr[2]/td[3]
+            String name = element.findElement(By.xpath("./td[3]")).getText();
+            String lastname = element.findElement(By.xpath("./td[2]")).getText();
 
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
 

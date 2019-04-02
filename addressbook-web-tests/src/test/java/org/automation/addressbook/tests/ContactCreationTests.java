@@ -2,7 +2,6 @@ package org.automation.addressbook.tests;
 
 
 import org.automation.addressbook.model.ContactData;
-import org.automation.addressbook.model.GroupData;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -13,7 +12,7 @@ public class ContactCreationTests extends TestBase {
 
     @Test
     public void testContactCreation() throws Exception {
-        ContactData contact = new ContactData("Satan", "foo", "[none]");
+        ContactData contact = new ContactData("Stan", "frroo", "[none]");
 
         app.getNavigationHelper().gotoHomePage();
         List<ContactData> before = app.getContactHelper().getContactList();

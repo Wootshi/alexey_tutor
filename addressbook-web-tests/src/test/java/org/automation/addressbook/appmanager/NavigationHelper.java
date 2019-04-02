@@ -4,6 +4,8 @@ import org.automation.addressbook.model.ContactData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import java.util.concurrent.TimeUnit;
+
 public class NavigationHelper extends BaseHelper {
 
     public NavigationHelper(WebDriver driver) {
@@ -27,6 +29,10 @@ public class NavigationHelper extends BaseHelper {
         }
 
         click(By.cssSelector("#nav > ul:nth-child(1) > li:nth-child(1) > a:nth-child(1)"));
+    }
+
+    public void wait(int seconds) {
+        driver.manage().timeouts().implicitlyWait(seconds, TimeUnit.SECONDS);
     }
 
 //    public void enterFirstLastName(ContactData contactData) {

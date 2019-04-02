@@ -4,6 +4,8 @@ import org.automation.addressbook.model.ContactData;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.Select;
 
+import java.util.concurrent.TimeUnit;
+
 public class BaseHelper {
     protected WebDriver driver;
     boolean acceptNextAlert = true;
@@ -30,7 +32,6 @@ public class BaseHelper {
 
         }
     }
-
 
     private boolean isAlertPresent() {
         try {
