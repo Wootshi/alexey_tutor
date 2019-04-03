@@ -6,18 +6,15 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class GroupHelper extends BaseHelper {
 
     public GroupHelper(WebDriver driver) {
         super(driver);
 
-    }
-
-    public void goToGroupPage() {
-        click(By.linkText("groups"));
     }
 
     public void submitFormCreation() {
@@ -45,6 +42,11 @@ public class GroupHelper extends BaseHelper {
         driver.findElements(By.name("selected[]")).get(index).click();
     }
 
+    public void selectGroupById(int id) {
+
+        driver.findElement(By.cssSelector("input[value='" + id + "']")).click();
+    }
+
     public void initGroupModification() {
         click(By.name("edit"));
     }
@@ -60,10 +62,18 @@ public class GroupHelper extends BaseHelper {
 
     }
 
-    public void createGroup(GroupData group) {
+    public void create(GroupData group) {
         initGroupCreation();
         fillGroupForm(group);
         submitFormCreation();
+
+    }
+
+    public void modifyGroup(GroupData group) {
+        selectGroupById(group.getId());
+        initGroupModification();
+        fillGroupForm(group);
+        submitGroupModification();
 
     }
 
@@ -76,16 +86,25 @@ public class GroupHelper extends BaseHelper {
         return driver.findElements(By.name("selected[]")).size();
     }
 
-    public List<GroupData> getGroupList() {
-        List<GroupData> groups = new ArrayList<>();
+    public Set<GroupData> all() {
+        Set<GroupData> groups = new HashSet<>();
         List<WebElement> elements = driver.findElements(By.cssSelector("span.group"));
         for (WebElement element : elements) {
             String name = element.getText();
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-            GroupData group = new GroupData(id, name, null, null);
-            groups.add(group);
+            groups.add(new GroupData().withId(id).withName(name));
         }
         return groups;
+    }
 
+    public void delete(int index) {
+        driver.findElements(By.name("selected[]")).get(index).click();
+        click(By.name("delete"));
+
+    }
+
+    public void delete(GroupData group) {
+        selectGroupById(group.getId());
+        click(By.name("delete"));
     }
 }

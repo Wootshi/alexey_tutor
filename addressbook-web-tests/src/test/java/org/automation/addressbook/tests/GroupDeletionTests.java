@@ -2,28 +2,31 @@ package org.automation.addressbook.tests;
 
 import org.automation.addressbook.model.GroupData;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.List;
+import java.util.Set;
 
 public class GroupDeletionTests extends TestBase {
 
+    @BeforeMethod
+    public void ensurePreconditions() {
+        app.goTo().groupPage();
+        if (app.group().all().size() == 0) {
+            app.group().create(new GroupData().withName("test1"));
+        }
+    }
 
     @Test
     public void testGroupDeletion() throws Exception {
-        app.getNavigationHelper().gotoGroupPage();
-
-        if (!app.getGroupHelper().isThereAnEntry()) {
-            app.getGroupHelper().createGroup(new GroupData("test1", null, null));
-        }
-        List<GroupData> before = app.getGroupHelper().getGroupList();
-        app.getGroupHelper().selectGroup(before.size() - 1);
-        app.getGroupHelper().deleteSelectedGroups();
-        app.getGroupHelper().goToGroupPage();
-        List<GroupData> after = app.getGroupHelper().getGroupList();
+        Set<GroupData> before = app.group().all();
+        GroupData deletedGroup = before.iterator().next();
+        app.group().delete(deletedGroup);
+        app.goTo().groupPage();
+        Set<GroupData> after = app.group().all();
         Assert.assertEquals(after.size(), before.size() - 1);
-        before.remove(before.size() - 1);
+        before.remove(deletedGroup);
         Assert.assertEquals(before, after);
     }
-
 }
