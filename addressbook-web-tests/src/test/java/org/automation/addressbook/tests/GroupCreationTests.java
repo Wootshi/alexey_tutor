@@ -2,6 +2,7 @@ package org.automation.addressbook.tests;
 
 
 import org.automation.addressbook.model.GroupData;
+import org.automation.addressbook.model.Groups;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.testng.Assert;
@@ -21,16 +22,17 @@ public class GroupCreationTests extends TestBase {
         GroupData group = new GroupData().withName("test2");
 
         app.goTo().groupPage();
-        Set<GroupData> before = app.group().all();
+        Groups before = app.group().all();
 
         app.group().create(group);
         app.goTo().groupPage();
-        Set<GroupData> after = app.group().all();
+        Groups after = app.group().all();
         assertThat(after.size(), equalTo(before.size() + 1));
+        ;
 
-        group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt());
         before.add(group);
-        Assert.assertEquals(before, after);
-        assertThat(after, equalTo(before.withAdded(group)));
+        //Assert.assertEquals(before, after);
+        assertThat(after, equalTo(
+                before.withAdded(group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
     }
 }

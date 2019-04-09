@@ -2,6 +2,7 @@ package org.automation.addressbook.appmanager;
 
 import org.automation.addressbook.model.ContactData;
 import org.automation.addressbook.model.GroupData;
+import org.automation.addressbook.model.Groups;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -69,7 +70,7 @@ public class GroupHelper extends BaseHelper {
 
     }
 
-    public void modifyGroup(GroupData group) {
+    public void modify(GroupData group) {
         selectGroupById(group.getId());
         initGroupModification();
         fillGroupForm(group);
@@ -86,8 +87,8 @@ public class GroupHelper extends BaseHelper {
         return driver.findElements(By.name("selected[]")).size();
     }
 
-    public Set<GroupData> all() {
-        Set<GroupData> groups = new HashSet<>();
+    public Groups all() {
+        Groups groups = new Groups();
         List<WebElement> elements = driver.findElements(By.cssSelector("span.group"));
         for (WebElement element : elements) {
             String name = element.getText();

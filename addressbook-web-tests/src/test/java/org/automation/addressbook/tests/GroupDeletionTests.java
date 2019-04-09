@@ -1,6 +1,9 @@
 package org.automation.addressbook.tests;
 
 import org.automation.addressbook.model.GroupData;
+import org.automation.addressbook.model.Groups;
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.MatcherAssert;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -20,13 +23,13 @@ public class GroupDeletionTests extends TestBase {
 
     @Test
     public void testGroupDeletion() throws Exception {
-        Set<GroupData> before = app.group().all();
+        Groups before = app.group().all();
         GroupData deletedGroup = before.iterator().next();
         app.group().delete(deletedGroup);
         app.goTo().groupPage();
-        Set<GroupData> after = app.group().all();
-        Assert.assertEquals(after.size(), before.size() - 1);
+        Groups after = app.group().all();
         before.remove(deletedGroup);
-        Assert.assertEquals(before, after);
+        //Assert.assertEquals(after.size(), before.size() - 1);
+        MatcherAssert.assertThat(after, CoreMatchers.equalTo(before.without(deletedGroup)));
     }
 }
