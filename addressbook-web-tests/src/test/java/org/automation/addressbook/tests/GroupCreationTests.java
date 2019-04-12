@@ -30,7 +30,7 @@ public class GroupCreationTests extends TestBase {
 
     @Test
     public void testBadGroupCreation() throws Exception {
-        GroupData group = new GroupData().withName("zaloopa");
+        GroupData group = new GroupData().withName("zaloopa'");
 
         app.goTo().groupPage();
         Groups before = app.group().all();
@@ -41,7 +41,6 @@ public class GroupCreationTests extends TestBase {
         Groups after = app.group().all();
         assertThat(after.size(), equalTo(before.size()));
 
-        assertThat(after, equalTo(
-                before.withAdded(group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
+        assertThat(after, equalTo(before));
     }
 }
