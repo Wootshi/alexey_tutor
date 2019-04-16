@@ -13,17 +13,17 @@ public class ContactModificationTests extends TestBase {
     @Test
     public void testContactModification() throws Exception {
         app.goTo().HomePage();
-        if (!app.getContactHelper().isThereAnEntry()) {
-            app.getContactHelper().createContact(new ContactData("Basil", "Denisovich", "test1"));
+        if (!app.contact().isThereAnEntry()) {
+            app.contact().create(new ContactData("Basil", "Denisovich", "test1"));
         }
         app.goTo().HomePage();
-        List<ContactData> before = app.getContactHelper().getContactList();
-        app.getContactHelper().initContactModification(before.size() + 1);
+        List<ContactData> before = app.contact().all();
+        app.contact().initContactModification(before.size() + 1);
         ContactData contact = new ContactData(before.get(before.size() - 1).getId(), "Kirill", "Methodius", "Buddha");
-        app.getContactHelper().fillContactForm(contact, false);
-        app.getContactHelper().submitContactModification();
+        app.contact().fillContactForm(contact, false);
+        app.contact().submitContactModification();
         app.goTo().HomePage();
-        List<ContactData> after = app.getContactHelper().getContactList();
+        List<ContactData> after = app.contact().all();
         Assert.assertEquals(after.size(), before.size());
 
         before.remove(before.size() - 1);

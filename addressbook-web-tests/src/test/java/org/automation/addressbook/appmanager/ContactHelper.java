@@ -1,7 +1,9 @@
 package org.automation.addressbook.appmanager;
 
 import org.automation.addressbook.model.ContactData;
+import org.automation.addressbook.model.Contacts;
 import org.automation.addressbook.model.GroupData;
+import org.automation.addressbook.model.Groups;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -13,6 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ContactHelper extends BaseHelper {
+
+    private Contacts contactCache = null;
 
     public ContactHelper(WebDriver driver) {
         super(driver);
@@ -33,11 +37,11 @@ public class ContactHelper extends BaseHelper {
 
 
         if (creation) {
-            String groupexists = driver.findElement(By.name("new_group")).getText();
+            String contactexists = driver.findElement(By.name("new_group")).getText();
 
-            if (groupexists.equals(contactData.getGroup())) {
+            if (contactexists.equals(contactData.getGroup())) {
                 new Select(driver.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
-            } else if (!groupexists.equals(contactData.getGroup())) {
+            } else if (!contactexists.equals(contactData.getGroup())) {
                 new Select(driver.findElement(By.name("new_group"))).selectByVisibleText("[none]");
             }
 
@@ -62,6 +66,11 @@ public class ContactHelper extends BaseHelper {
         driver.findElements(By.name("selected[]")).get(index).click();
     }
 
+    public void selectContactById(int id) {
+
+        driver.findElement(By.cssSelector("input[value='" + id + "']")).click();
+    }
+
 
     public void initContactModification(int row) {
         click(By.xpath("//table/tbody/tr[" + row + "]/td[8]/a"));
@@ -69,32 +78,54 @@ public class ContactHelper extends BaseHelper {
     }
 
     public void submitContactModification() {
+
         click(By.name("update"));
     }
 
-    public void createContact(ContactData contact) {
-        initContactCreation();
-        fillContactForm(contact, true);
-        submitContactCreation();
+    public int count() {
+        return driver.findElements(By.name("selected[]")).size();
+    }
+
+    public void modify(ContactData contact) {
+        selectContactById(contact.getId());
+        initContactModification(contact.getId() + 1);
+        fillContactForm(contact, false);
+        submitContactModification();
+        contactCache = null;
 
     }
 
-    public List<ContactData> getContactList() {
-        List<ContactData> contacts = new ArrayList<>();
+    public void create(ContactData contact) {
+        initContactCreation();
+        fillContactForm(contact, true);
+        submitContactCreation();
+        contactCache = null;
+
+    }
+
+    public void delete(ContactData contact) {
+        selectContactById(contact.getId());
+        deleteSelectedContact();
+        contactCache = null;
+    }
+
+    public Contacts all() {
+        if (contactCache != null) {
+            return new Contacts(contactCache);
+        }
+        contactCache = new Contacts();
         List<WebElement> elements = driver.findElements(By.name("entry"));
         for (WebElement element : elements) {
 
-            //*[@id="maintable"]/tbody/tr[2]/td[2]
-            //*[@id="maintable"]/tbody/tr[2]/td[3]
             String name = element.findElement(By.xpath("./td[3]")).getText();
             String lastname = element.findElement(By.xpath("./td[2]")).getText();
 
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
 
             ContactData contact = new ContactData(id, name, lastname, null);
-            contacts.add(contact);
+            contactCache.add(contact);
         }
-        return contacts;
+        return new Contacts(contactCache);
 
     }
 

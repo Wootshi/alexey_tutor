@@ -87,7 +87,7 @@ public class GroupHelper extends BaseHelper {
 
     }
 
-    public int Count() {
+    public int count() {
         return driver.findElements(By.name("selected[]")).size();
     }
 
