@@ -2,6 +2,7 @@ package org.automation.addressbook.tests;
 
 
 import org.automation.addressbook.model.ContactData;
+import org.automation.addressbook.model.Contacts;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -17,13 +18,16 @@ public class ContactModificationTests extends TestBase {
             app.contact().create(new ContactData("Basil", "Denisovich", "test1"));
         }
         app.goTo().HomePage();
-        List<ContactData> before = app.contact().all();
-        app.contact().initContactModification(before.size() + 1);
-        ContactData contact = new ContactData(before.get(before.size() - 1).getId(), "Kirill", "Methodius", "Buddha");
+        Contacts before = app.contact().all();
+        ContactData modifiedContact = before.iterator().next();
+
+        app.contact().modify(modifiedContact);
+        ContactData contact = new ContactData().withId(modifiedContact.getId()).withName("ttesttt").withHeader("test2").withFooter("test3");
+
         app.contact().fillContactForm(contact, false);
         app.contact().submitContactModification();
         app.goTo().HomePage();
-        List<ContactData> after = app.contact().all();
+        //List<ContactData> after = app.contact().all();
         Assert.assertEquals(after.size(), before.size());
 
         before.remove(before.size() - 1);

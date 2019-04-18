@@ -4,9 +4,9 @@ public class ContactData {
 
 
     private int id;
-    private final String firstname;
-    private final String lastname;
-    private final String group;
+    private String firstname;
+    private String lastname;
+    private String group;
 
     public ContactData(String firstname, String lastname, String group) {
         this.id = Integer.MAX_VALUE;
@@ -22,6 +22,25 @@ public class ContactData {
         this.group = group;
     }
 
+    public ContactData withId(int id) {
+        this.id = id;
+        return this;
+    }
+
+    public ContactData withFirstName(String firstname) {
+        this.firstname = firstname;
+        return this;
+    }
+
+    public ContactData withSecondName(String lastname) {
+        this.lastname = lastname;
+        return this;
+    }
+
+    public ContactData withGroup(String group) {
+        this.group = group;
+        return this;
+    }
 
     public String getFirstname() {
         return firstname;
