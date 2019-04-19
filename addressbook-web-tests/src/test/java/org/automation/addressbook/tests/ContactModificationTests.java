@@ -3,11 +3,16 @@ package org.automation.addressbook.tests;
 
 import org.automation.addressbook.model.ContactData;
 import org.automation.addressbook.model.Contacts;
+import org.hamcrest.MatcherAssert;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.Comparator;
 import java.util.List;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.*;
+import static org.testng.Assert.assertEquals;
 
 public class ContactModificationTests extends TestBase {
 
@@ -15,26 +20,19 @@ public class ContactModificationTests extends TestBase {
     public void testContactModification() throws Exception {
         app.goTo().HomePage();
         if (!app.contact().isThereAnEntry()) {
-            app.contact().create(new ContactData("Basil", "Denisovich", "test1"));
+            app.contact().create(new ContactData().withFirstName("Harry").withSecondName("Topor"));
         }
+
+        ContactData contact = new ContactData().withFirstName("Barry").withSecondName("Test");
+
         app.goTo().HomePage();
         Contacts before = app.contact().all();
         ContactData modifiedContact = before.iterator().next();
-
         app.contact().modify(modifiedContact);
-        ContactData contact = new ContactData().withId(modifiedContact.getId()).withName("ttesttt").withHeader("test2").withFooter("test3");
-
-        app.contact().fillContactForm(contact, false);
-        app.contact().submitContactModification();
         app.goTo().HomePage();
-        //List<ContactData> after = app.contact().all();
-        Assert.assertEquals(after.size(), before.size());
+        Contacts after = app.contact().all();
+        assertEquals(after.size(), before.size());
 
-        before.remove(before.size() - 1);
-        before.add(contact);
-        Comparator<? super ContactData> byId = (c1, c2) -> Integer.compare(c1.getId(), c2.getId());
-        before.sort(byId);
-        after.sort(byId);
-        Assert.assertEquals(after, before);
+        assertThat(after, equalTo(before.without(modifiedContact).withAdded(contact)));
     }
 }

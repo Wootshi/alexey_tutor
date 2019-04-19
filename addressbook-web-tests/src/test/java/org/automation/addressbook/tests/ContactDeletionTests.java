@@ -21,7 +21,7 @@ public class ContactDeletionTests extends TestBase {
         app.goTo().HomePage();
 
         if (!app.contact().isThereAnEntry()) {
-            app.contact().create(new ContactData("Vishnu", "Petrovich", null));
+            app.contact().create(new ContactData().withFirstName("Basil").withSecondName("Broketail"));
         }
         app.goTo().HomePage();
         Contacts before = app.contact().all();

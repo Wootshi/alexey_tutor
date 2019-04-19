@@ -8,19 +8,19 @@ public class ContactData {
     private String lastname;
     private String group;
 
-    public ContactData(String firstname, String lastname, String group) {
-        this.id = Integer.MAX_VALUE;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.group = group;
-    }
+    //public ContactData(String firstname, String lastname, String group) {
+    //this.id = Integer.MAX_VALUE;
+    //this.firstname = firstname;
+    // this.lastname = lastname;
+    //this.group = group;
+    //}
 
-    public ContactData(int id, String firstname, String lastname, String group) {
-        this.id = id;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.group = group;
-    }
+    //public ContactData(int id, String firstname, String lastname, String group) {
+    //this.id = id;
+    // this.firstname = firstname;
+    // this.lastname = lastname;
+    //this.group = group;
+    //}
 
     public ContactData withId(int id) {
         this.id = id;
@@ -38,6 +38,7 @@ public class ContactData {
     }
 
     public ContactData withGroup(String group) {
+
         this.group = group;
         return this;
     }
