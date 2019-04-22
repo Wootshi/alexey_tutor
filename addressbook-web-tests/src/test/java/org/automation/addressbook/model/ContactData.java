@@ -32,7 +32,7 @@ public class ContactData {
         return this;
     }
 
-    public ContactData withSecondName(String lastname) {
+    public ContactData withLastName(String lastname) {
         this.lastname = lastname;
         return this;
     }

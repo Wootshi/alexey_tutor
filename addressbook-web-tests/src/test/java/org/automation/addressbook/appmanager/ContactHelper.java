@@ -2,16 +2,12 @@ package org.automation.addressbook.appmanager;
 
 import org.automation.addressbook.model.ContactData;
 import org.automation.addressbook.model.Contacts;
-import org.automation.addressbook.model.GroupData;
-import org.automation.addressbook.model.Groups;
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ContactHelper extends BaseHelper {
@@ -88,7 +84,7 @@ public class ContactHelper extends BaseHelper {
 
     public void modify(ContactData contact) {
         selectContactById(contact.getId());
-        initContactModification(contact.getId() + 1);
+        initContactModification(count() + 1);
         fillContactForm(contact, false);
         submitContactModification();
         contactCache = null;
@@ -122,7 +118,7 @@ public class ContactHelper extends BaseHelper {
 
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
 
-            ContactData contact = new ContactData().;
+            ContactData contact = new ContactData().withId(id).withFirstName(name).withLastName(lastname);
             contactCache.add(contact);
         }
         return new Contacts(contactCache);
