@@ -84,7 +84,7 @@ public class ContactHelper extends BaseHelper {
 
     public void modify(ContactData contact) {
         selectContactById(contact.getId());
-        initContactModification(count() + 1);
+        initContactModification(2);
         fillContactForm(contact, false);
         submitContactModification();
         contactCache = null;
@@ -110,12 +110,11 @@ public class ContactHelper extends BaseHelper {
             return new Contacts(contactCache);
         }
         contactCache = new Contacts();
-        List<WebElement> elements = driver.findElements(By.name("entry"));
+        List<WebElement> elements = driver.findElements(By.xpath("./tr[@name=\"entry\"]"));
         for (WebElement element : elements) {
 
             String name = element.findElement(By.xpath("./td[3]")).getText();
             String lastname = element.findElement(By.xpath("./td[2]")).getText();
-
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
 
             ContactData contact = new ContactData().withId(id).withFirstName(name).withLastName(lastname);

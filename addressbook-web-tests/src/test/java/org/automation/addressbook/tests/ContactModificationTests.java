@@ -23,10 +23,10 @@ public class ContactModificationTests extends TestBase {
 
     @Test
     public void testContactModification() throws Exception {
-        ContactData contact = new ContactData().withFirstName("Barry").withLastName("Test");
         Contacts before = app.contact().all();
         ContactData modifiedContact = before.iterator().next();
-        app.contact().modify(modifiedContact);
+        ContactData contact = new ContactData().withId(modifiedContact.getId()).withFirstName("Brrry").withLastName("aTet");
+        app.contact().modify(contact);
         app.goTo().HomePage();
         Contacts after = app.contact().all();
         assertEquals(after.size(), before.size());

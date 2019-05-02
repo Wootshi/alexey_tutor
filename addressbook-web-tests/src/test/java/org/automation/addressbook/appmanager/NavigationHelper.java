@@ -28,7 +28,7 @@ public class NavigationHelper extends BaseHelper {
             return;
         }
 
-        click(By.cssSelector("#nav > ul:nth-child(1) > li:nth-child(1) > a:nth-child(1)"));
+        click(By.xpath("//*[@id=\"nav\"]/ul/li[1]/a"));
     }
 
     public void wait(int seconds) {
