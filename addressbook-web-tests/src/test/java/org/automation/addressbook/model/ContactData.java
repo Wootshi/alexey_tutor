@@ -3,7 +3,7 @@ package org.automation.addressbook.model;
 public class ContactData {
 
 
-    private int id;
+    private int id = Integer.MAX_VALUE;
     private String firstname;
     private String lastname;
     private String group;
