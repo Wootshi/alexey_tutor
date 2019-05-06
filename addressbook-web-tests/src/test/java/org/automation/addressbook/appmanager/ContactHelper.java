@@ -118,8 +118,7 @@ public class ContactHelper extends BaseHelper {
 
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
 
-            ContactData contact = new ContactData().withId(id).withFirstName(name).withLastName(lastname);
-            contactCache.add(contact);
+            contactCache.add(new ContactData().withId(id).withFirstName(name).withLastName(lastname));
         }
         return new Contacts(contactCache);
     }
