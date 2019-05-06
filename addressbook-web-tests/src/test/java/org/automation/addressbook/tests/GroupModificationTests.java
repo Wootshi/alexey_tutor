@@ -18,6 +18,7 @@ public class GroupModificationTests extends TestBase {
         app.goTo().groupPage();
         if (app.group().all().size() == 0) {
             app.group().create(new GroupData().withName("test1"));
+            app.goTo().groupPage();
         }
     }
 
@@ -25,7 +26,7 @@ public class GroupModificationTests extends TestBase {
     public void testGroupModification() {
         Groups before = app.group().all();
         GroupData modifiedGroup = before.iterator().next();
-        GroupData group = new GroupData().withId(modifiedGroup.getId()).withName("ttesttt").withHeader("test2").withFooter("test3");
+        GroupData group = new GroupData().withId(modifiedGroup.getId()).withName("test").withHeader("test2").withFooter("test3");
 
         app.group().modify(group);
         app.goTo().groupPage();

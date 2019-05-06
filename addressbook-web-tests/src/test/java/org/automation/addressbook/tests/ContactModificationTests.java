@@ -16,7 +16,7 @@ public class ContactModificationTests extends TestBase {
     public void ensurePreconditions() {
         app.goTo().HomePage();
         if (!app.contact().isThereAnEntry()) {
-            app.contact().create(new ContactData().withFirstName("Harry").withLastName("Topor"));
+            app.contact().create(new ContactData().withFirstName("Hыrry").withLastName("Tыpor"));
         }
         app.goTo().HomePage();
     }
@@ -25,7 +25,7 @@ public class ContactModificationTests extends TestBase {
     public void testContactModification() throws Exception {
         Contacts before = app.contact().all();
         ContactData modifiedContact = before.iterator().next();
-        ContactData contact = new ContactData().withId(modifiedContact.getId()).withFirstName("Brrry").withLastName("aTet");
+        ContactData contact = new ContactData().withId(modifiedContact.getId()).withFirstName("Brыrry").withLastName("aыTet");
         app.contact().modify(contact);
         app.goTo().HomePage();
         Contacts after = app.contact().all();

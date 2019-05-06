@@ -12,7 +12,7 @@ public class GroupCreationTests extends TestBase {
 
     @Test
     public void testGroupCreation() throws Exception {
-        GroupData group = new GroupData().withName("zaloopa");
+        GroupData group = new GroupData().withName("foo");
 
         app.goTo().groupPage();
         Groups before = app.group().all();
