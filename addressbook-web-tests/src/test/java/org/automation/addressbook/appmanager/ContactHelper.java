@@ -132,7 +132,7 @@ public class ContactHelper extends BaseHelper {
         String work = driver.findElement(By.name("work")).getAttribute("value");
         driver.navigate().back();
         return new ContactData().withId(contact.getId()).withFirstName(firstname).withLastName(lastname)
-                .with
+                .withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work);
 
     }
 

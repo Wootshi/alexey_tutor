@@ -3,7 +3,7 @@ package org.automation.addressbook.tests;
 import org.automation.addressbook.model.ContactData;
 import org.testng.annotations.Test;
 
-public class TestContactPhones extends TestBase {
+public class ContactPhonesTest extends TestBase {
 
     @Test
     public void TestContactPhones() {

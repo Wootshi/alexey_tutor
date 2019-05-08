@@ -9,6 +9,9 @@ public class ContactData {
     private String firstname;
     private String lastname;
     private String group;
+    private String homephone;
+    private String mobilephone;
+    private String workphone;
 
     //public ContactData(String firstname, String lastname, String group) {
     //this.id = Integer.MAX_VALUE;
@@ -42,6 +45,21 @@ public class ContactData {
     public ContactData withGroup(String group) {
 
         this.group = group;
+        return this;
+    }
+
+    public ContactData withHomePhone(String homephone) {
+        this.homephone = homephone;
+        return this;
+    }
+
+    public ContactData withMobilePhone(String mobilephone) {
+        this.mobilephone = mobilephone;
+        return this;
+    }
+
+    public ContactData withWorkPhone(String workphone) {
+        this.workphone = workphone;
         return this;
     }
 
