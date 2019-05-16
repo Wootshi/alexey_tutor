@@ -29,7 +29,7 @@ public class ContactHelper extends BaseHelper {
 
 
         type(By.name("firstname"), contactData.getFirstname());
-        type(By.name("lastname"), contactData.getSecondname());
+        type(By.name("lastname"), contactData.getLastname());
 
 
         if (creation) {
