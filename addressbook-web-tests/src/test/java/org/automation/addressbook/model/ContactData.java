@@ -9,6 +9,9 @@ public class ContactData {
     private String firstname;
     private String lastname;
     private String group;
+    private String homephone;
+    private String mobilephone;
+    private String workphone;
 
     @Override
     public boolean equals(Object o) {
@@ -50,10 +53,6 @@ public class ContactData {
     public String getWorkphone() {
         return workphone;
     }
-
-    private String homephone;
-    private String mobilephone;
-    private String workphone;
 
     //public ContactData(String firstname, String lastname, String group) {
     //this.id = Integer.MAX_VALUE;

@@ -2,7 +2,6 @@ package org.automation.addressbook.tests;
 
 import org.automation.addressbook.model.ContactData;
 import org.testng.annotations.Test;
-
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
