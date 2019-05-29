@@ -16,5 +16,6 @@ public class ContactPhonesTest extends TestBase {
         assertThat(contact.getHomephone(), equalTo(contactInfoFromEditForm.getHomephone()));
         assertThat(contact.getWorkphone(), equalTo(contactInfoFromEditForm.getWorkphone()));
         assertThat(contact.getMobilephone(), equalTo(contactInfoFromEditForm.getMobilephone()));
+
     }
 }

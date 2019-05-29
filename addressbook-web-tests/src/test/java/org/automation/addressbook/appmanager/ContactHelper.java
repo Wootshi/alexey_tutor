@@ -16,7 +16,6 @@ public class ContactHelper extends BaseHelper {
 
     public ContactHelper(WebDriver driver) {
         super(driver);
-
     }
 
     public void submitContactCreation() {
@@ -116,9 +115,8 @@ public class ContactHelper extends BaseHelper {
             int id = Integer.parseInt(cells.get(0).findElement(By.tagName("input")).getAttribute("value"));
             String lastname = cells.get(1).getText();
             String firstname = cells.get(2).getText();
-            String phoneCell = String.
 
-            if (cells.get(5) != null) {
+            if (cells.get(5).getAttribute("value") != null) {
                 String[] phones = cells.get(5).getText().split("\n");
 
                 if (phones.length > 2) {
@@ -127,26 +125,14 @@ public class ContactHelper extends BaseHelper {
                     contactCache.add(new ContactData().withId(id).withFirstName(firstname).withLastName(lastname).withHomePhone(phones[0]).withMobilePhone(phones[1]));
 
                 } else if (phones.length == 1) {
-                    contactCache.add(new ContactData().withId(id).withFirstName(firstname).withLastName(lastname));
-                } else {
+                    contactCache.add(new ContactData().withId(id).withFirstName(firstname).withLastName(lastname).withHomePhone(phones[0]));
                 }
+            } else {
+
                 contactCache.add(new ContactData().withId(id).withFirstName(firstname).withLastName(lastname));
             }
-
-            //if (phones.length > 2) {
-
-            //} else if (phones.length > 1) {
-            //contactCache.add(new ContactData().withId(id).withFirstName(firstname).withLastName(lastname)
-            //.withHomePhone(phones[0]).withMobilePhone(phones[1]));
-            //} else if (phones.length == 1) {
-            //contactCache.add(new ContactData().withId(id).withFirstName(firstname).withLastName(lastname)
-            //.withHomePhone(phones[0]));
-            //} else {
-            //7 contactCache.add(new ContactData().withId(id).withFirstName(firstname).withLastName(lastname));
-
         }
 
-        //}
         return new Contacts(contactCache);
     }
 
